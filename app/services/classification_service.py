@@ -6,7 +6,6 @@ import string
 import boto3
 from dotenv import load_dotenv
 from joblib import load
-import psycopg2
 from app.db.connection import postgreSQL_connection
 
 load_dotenv()
