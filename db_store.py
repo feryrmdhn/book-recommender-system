@@ -4,7 +4,7 @@ import os
 
 load_dotenv()
 
-PUBLIC_URL_POSTGRE = os.environ.get("PUBLIC_URL_POSTGRE")
+PUBLIC_URL_POSTGRE = os.getenv("PUBLIC_URL_POSTGRE")
 
 # Store Data default to DB
 df = pd.read_csv('./app/assets/book_with_genre.csv')
