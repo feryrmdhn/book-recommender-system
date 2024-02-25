@@ -1,10 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends, Query
 from joblib import load
-import pandas as pd
-import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from gensim.models import KeyedVectors
-import json
 from app.utils.api_utils import validate_api_key
 from app.db.connection import postgreSQL_connection
 
