@@ -34,6 +34,9 @@ COPY --from=builder-base /app/ /app/
 WORKDIR /app
 COPY . /app
 
+# Copy .env file
+COPY .env /app
+
 # This app run in port 8001
 EXPOSE 8001
 
