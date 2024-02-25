@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     build-essential
 
 # Install psycopg2
-RUN apt-get install -y libpq-dev && \
+RUN apt-get update && apt-get install -y libpq-dev && \
     pip install psycopg2
 
 # Poetry:
