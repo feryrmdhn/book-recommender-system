@@ -5,7 +5,7 @@ import os
 
 load_dotenv()
 
-API_KEY = os.environ.get("API_KEY")
+API_KEY = os.getenv("API_KEY")
 
 if API_KEY is None:
     raise ValueError("API_KEY environment variable is not set")
