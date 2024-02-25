@@ -4,10 +4,10 @@ import os
 
 load_dotenv()
 
-DB_PUBLIC_HOST = os.environ.get("DB_PUBLIC_HOST")
-DB_PORT = os.environ.get("DB_PORT")
-DB_USERNAME = os.environ.get("DB_USERNAME")
-DB_PASS = os.environ.get("DB_PASS")
+DB_PUBLIC_HOST = os.getenv("DB_PUBLIC_HOST")
+DB_PORT = os.getenv("DB_PORT")
+DB_USERNAME = os.getenv("DB_USERNAME")
+DB_PASS = os.getenv("DB_PASS")
 
 class PostgreSQLConnection:
     __instance = None
