@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 
 # Install psycopg2
 RUN apt-get update && apt-get install -y libpq-dev && \
-    pip install psycopg2
+    pip install psycopg2-binary
 
 # Poetry:
 RUN pip install poetry
