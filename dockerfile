@@ -16,6 +16,10 @@ FROM python-base as builder-base
 RUN apt-get update && apt-get install --no-install-recommends -y \
     build-essential
 
+# Install psycopg2
+RUN apt-get install -y libpq-dev && \
+    pip install psycopg2
+
 # Poetry:
 RUN pip install poetry
 
@@ -33,9 +37,6 @@ COPY --from=builder-base /app/ /app/
 
 WORKDIR /app
 COPY . /app
-
-# Copy .env file
-COPY .env /app
 
 # This app run in port 8001
 EXPOSE 8001
