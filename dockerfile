@@ -35,7 +35,7 @@ WORKDIR /app
 COPY . /app
 
 # Copy .env file
-COPY .env /app/
+COPY .env
 
 # This app run in port 8001
 EXPOSE 8001
