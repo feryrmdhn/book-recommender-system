@@ -11,9 +11,9 @@ from app.db.connection import postgreSQL_connection
 
 load_dotenv()
 
-S3_ENDPOINT = os.environ.get("S3_ENDPOINT")
-S3_ACCESS_KEY = os.environ.get("S3_ACCESS_KEY")
-S3_SECRET_KEY = os.environ.get("S3_SECRET_KEY")
+S3_ENDPOINT = os.getenv("S3_ENDPOINT")
+S3_ACCESS_KEY = os.getenv("S3_ACCESS_KEY")
+S3_SECRET_KEY = os.getenv("S3_SECRET_KEY")
 
 router = APIRouter()
 
