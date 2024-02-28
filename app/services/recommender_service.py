@@ -16,6 +16,8 @@ async def book_recommendations(
     genre: str = Query(..., description="Book genre"),
     api_key: str = Depends(validate_api_key)
 ):
+    cursor = None
+    
     try:
         # Query data from PostgreSQL
         cursor = postgreSQL_connection.get_cursor()
@@ -69,6 +71,7 @@ async def book_recommendations(
         return get_recommendations(title, genre, data, model)
 
     except Exception as e:
-        cursor.execute("ROLLBACK;")
-        cursor.close()
+        if cursor:
+            cursor.execute("ROLLBACK;")
+            cursor.close()
         raise HTTPException(status_code=500, detail=str(e))
