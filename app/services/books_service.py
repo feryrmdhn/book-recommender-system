@@ -6,6 +6,8 @@ router = APIRouter()
 
 @router.get("/v1/books")
 async def get_books(genre: str = Query(None, alias="genre"), api_key: str = Depends(validate_api_key)):
+    cursor = None
+    
     try:
         cursor = postgreSQL_connection.get_cursor()
 
@@ -27,6 +29,7 @@ async def get_books(genre: str = Query(None, alias="genre"), api_key: str = Depe
         }
 
     except Exception as e:
-        cursor.execute("ROLLBACK;")
-        cursor.close()
+        if cursor:
+            cursor.execute("ROLLBACK;")
+            cursor.close()
         raise HTTPException(status_code=500, detail=str(e))
