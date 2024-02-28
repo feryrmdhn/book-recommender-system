@@ -47,6 +47,8 @@ async def classify_book(
     age: int = Form(...),
     api_key: str = Depends(validate_api_key)
 ):
+    cursor = None
+  
     try:
         cursor = postgreSQL_connection.get_cursor()
         # Generate ISBN random string
