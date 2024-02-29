@@ -7,6 +7,8 @@ on:
 jobs:
   auto_predict:
     runs-on: ubuntu-22.04
+    container:
+      image: registry.digitalocean.com/dibimbing/fastapi-recommender-system:2d2015b
     env:
       PYTHONPATH: "app:$PYTHONPATH"
     steps:
