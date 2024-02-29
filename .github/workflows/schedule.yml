@@ -26,7 +26,7 @@ jobs:
         run: doctl registry login --expiry-seconds 600
 
       - name: Pull image from DigitalOcean Container Registry
-        run: docker pull $(echo $REGISTRY)/$(echo $IMAGE_NAME):2d2015b
+        run: docker pull $(echo $REGISTRY)/$(echo $IMAGE_NAME):1c76ee4
         
       - name: Run auto_predict.py
         run: |
@@ -34,4 +34,4 @@ jobs:
           python auto_predict_service.py
 
       - name: Push image to DigitalOcean Container Registry
-        run: docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):2d2015b
+        run: docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):1c76ee4
