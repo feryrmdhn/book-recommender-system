@@ -1,0 +1,19 @@
+name: Cron
+
+on:
+  schedule:
+    - cron: "0 10 * * *"
+
+jobs:
+  auto_predict:
+    runs-on: ubuntu-22.04
+    env:
+      PYTHONPATH: "app:$PYTHONPATH"
+    steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v2
+        
+      - name: Run auto_predict.py
+        run: |
+          cd app/services
+          python auto_predict_service.py
