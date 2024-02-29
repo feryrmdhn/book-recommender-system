@@ -9,13 +9,31 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: registry.digitalocean.com/dibimbing/fastapi-recommender-system:2d2015b
+      
     env:
+      REGISTRY: "registry.digitalocean.com/dibimbing"
+      IMAGE_NAME: "fastapi-recommender-system"
       PYTHONPATH: "app:$PYTHONPATH"
+      
     steps:
       - name: Checkout the repo 
         uses: actions/checkout@v2
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 600
+
+      - name: Pull image from DigitalOcean Container Registry
+        run: docker pull $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
         
       - name: Run auto_predict.py
         run: |
           cd app/services
           python auto_predict_service.py
+
+      - name: Push image to DigitalOcean Container Registry
+        run: docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
