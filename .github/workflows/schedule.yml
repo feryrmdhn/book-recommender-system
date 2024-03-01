@@ -37,5 +37,5 @@ jobs:
           
       - name: Run the cron job
         run: |
-           cd app/services
-           PYTHONPATH=/app:$PYTHONPATH python auto_predict_service.py
+           cd $GITHUB_WORKSPACE
+           python $GITHUB_WORKSPACE/app/services/auto_predict_service.py
