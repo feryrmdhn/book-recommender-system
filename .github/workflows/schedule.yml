@@ -28,10 +28,11 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install --no-install-recommends -y build-essential python3-venv
+          sudo apt-get install --root-user-action=ignore --no-install-recommends -y build-essential python3-venv
           python3 -m venv env
           source env/bin/activate
-          sudo pip install poetry
+          sudo pip --root-user-action=ignore install poetry
+          mkdir -p /app
           sudo cp pyproject.toml poetry.lock /app/
           sudo poetry config virtualenvs.create false && sudo poetry install --no-dev --no-interaction --no-ansi
 
