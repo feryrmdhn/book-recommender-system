@@ -2,7 +2,7 @@ name: Cron
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "0 10 * * *"
 
 jobs:
   auto_predict:
@@ -38,6 +38,7 @@ jobs:
           
       - name: Run the cron job
         run: |
-          cd $GITHUB_WORKSPACE/app/services
+          cp -r $GITHUB_WORKSPACE/app /app
+          cd app/services
           python auto_predict_service.py
           
