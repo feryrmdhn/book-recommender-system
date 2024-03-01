@@ -1,6 +1,5 @@
 from fastapi import HTTPException, Depends
 from app.utils.api_utils import validate_api_key
-import boto3
 from joblib import load
 import psycopg2
 from app.db.connection import postgreSQL_connection
