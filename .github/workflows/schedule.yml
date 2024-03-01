@@ -2,7 +2,7 @@ name: Cron
 
 on:
   schedule:
-    - cron: "*/20 * * * *"
+    - cron: "*/5 * * * *"
 
 jobs:
   auto_predict:
@@ -25,5 +25,16 @@ jobs:
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 600
 
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install --no-install-recommends -y build-essential
+          pip install poetry
+          cp pyproject.toml poetry.lock /app/
+          cd /app && poetry config virtualenvs.create false && poetry install --no-dev --no-interaction --no-ansi
+
       - name: Run the cron job
-        run: docker run $REGISTRY/$IMAGE_NAME -f cronjob.dockerfile
+        run: |
+          cd app/service
+          python auto_predict_service.py
+          
