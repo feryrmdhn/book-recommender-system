@@ -17,6 +17,9 @@ jobs:
       - name: Checkout the repo 
         uses: actions/checkout@v2
 
+      - name: Debug SSH Key
+        run: echo "${{ secrets.SSH_KEY }}" | base64 --decode || true
+
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
