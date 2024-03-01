@@ -2,7 +2,7 @@ name: Cron
 
 on:
   schedule:
-    - cron: "0 */4 * * *"
+    - cron: "*/5 * * * *"
 
 jobs:
   auto_predict:
@@ -25,13 +25,6 @@ jobs:
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 600
 
-      - name: Pull image from DigitalOcean Container Registry
-        run: docker pull $(echo $REGISTRY)/$(echo $IMAGE_NAME):1c76ee4
-        
-      - name: Run auto_predict.py
+      - name: Run auto predict
         run: |
-          cd app/services
-          python auto_predict_service.py
-
-      - name: Push image to DigitalOcean Container Registry
-        run: docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):1c76ee4
+          docker script ./cronjob.dockerfile
