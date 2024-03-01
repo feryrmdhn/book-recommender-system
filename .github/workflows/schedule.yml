@@ -27,4 +27,4 @@ jobs:
 
       - name: Run auto predict
         run: |
-          docker script ./cronjob.dockerfile
+          docker run -v ./cronjob.dockerfile
