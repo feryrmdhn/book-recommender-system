@@ -29,7 +29,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install --no-install-recommends -y build-essential python3-venv
-          python3 -m venv env
+          python3.11 -m venv env
           source env/bin/activate
           sudo pip install poetry
           cd $GITHUB_WORKSPACE 
