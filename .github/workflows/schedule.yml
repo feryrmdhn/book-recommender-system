@@ -28,16 +28,13 @@ jobs:
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 600
 
-      - name: Reset apt directory permissions
-        run: sudo chown -R $USER:$USER /var/lib/apt/lists
-
       - name: Install dependencies
         run: |
-          apt-get update
-          apt-get install --no-install-recommends -y build-essential
-          pip install poetry
-          cp pyproject.toml poetry.lock /app/
-          cd /app && poetry config virtualenvs.create false && poetry install --no-dev --no-interaction --no-ansi
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y build-essential
+          sudo pip install poetry
+          sudo cp pyproject.toml poetry.lock /app/
+          cd /app && sudo poetry config virtualenvs.create false && sudo poetry install --no-dev --no-interaction --no-ansi
 
       - name: Run the cron job
         run: |
