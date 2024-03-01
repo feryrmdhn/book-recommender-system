@@ -28,6 +28,9 @@ jobs:
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 600
 
+      - name: Reset apt directory permissions
+        run: sudo chown -R $USER:$USER /var/lib/apt/lists
+
       - name: Install dependencies
         run: |
           apt-get update
