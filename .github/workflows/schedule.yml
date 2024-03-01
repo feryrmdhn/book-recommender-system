@@ -34,12 +34,9 @@ jobs:
           sudo pip install poetry
           cd $GITHUB_WORKSPACE 
           sudo poetry config virtualenvs.create false && sudo poetry install --no-dev --no-interaction --no-ansi
-
-      - name: List directory contents
-        run: ls -la $GITHUB_WORKSPACE
           
       - name: Run the cron job
         run: |
-          cd app/service
+          cd $GITHUB_WORKSPACE/app/services
           python auto_predict_service.py
           
