@@ -32,10 +32,11 @@ jobs:
           python3 -m venv env
           source env/bin/activate
           sudo pip install poetry
-          cd /app && sudo poetry config virtualenvs.create false && sudo poetry install --no-dev --no-interaction --no-ansi
-
+          cd $GITHUB_WORKSPACE 
+          sudo poetry config virtualenvs.create false && sudo poetry install --no-dev --no-interaction --no-ansi
+          
       - name: Run the cron job
         run: |
-          cd app/service
+          cd $GITHUB_WORKSPACE/app/service
           python auto_predict_service.py
           
