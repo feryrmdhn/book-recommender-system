@@ -17,9 +17,6 @@ jobs:
       - name: Checkout the repo 
         uses: actions/checkout@v2
 
-      - name: Debug SSH Key
-        run: echo "${{ secrets.SSH_KEY }}" | base64 --decode || true
-
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
@@ -31,10 +28,12 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install --no-install-recommends -y build-essential
+          sudo apt-get install --no-install-recommends -y build-essential python3-venv
+          python3 -m venv env
+          source env/bin/activate
           sudo pip install poetry
           sudo cp pyproject.toml poetry.lock /app/
-          cd /app && sudo poetry config virtualenvs.create false && sudo poetry install --no-dev --no-interaction --no-ansi
+          sudo poetry config virtualenvs.create false && sudo poetry install --no-dev --no-interaction --no-ansi
 
       - name: Run the cron job
         run: |
