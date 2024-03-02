@@ -2,7 +2,7 @@ name: Cron
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/4 * * * *"
 
 jobs:
   auto_predict:
