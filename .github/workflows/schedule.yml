@@ -1,0 +1,42 @@
+name: Cron
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+
+jobs:
+  auto_predict:
+    runs-on: ubuntu-22.04
+      
+    env:
+      REGISTRY: "registry.digitalocean.com/dibimbing"
+      IMAGE_NAME: "fastapi-recommender-system"
+      
+    steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v2
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 600
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y build-essential python3.11-venv
+          python3.11 -m venv env
+          source env/bin/activate
+          sudo pip install exceptiongroup
+          sudo pip install poetry
+          cd $GITHUB_WORKSPACE 
+          sudo poetry config virtualenvs.create false && sudo poetry install --no-dev --no-interaction --no-ansi
+          
+      #Run auto predict as module
+      - name: Run the cron job
+        run: |
+           cd $GITHUB_WORKSPACE
+           python -m app.services.auto_predict_service
