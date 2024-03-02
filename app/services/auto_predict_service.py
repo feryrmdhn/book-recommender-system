@@ -2,7 +2,14 @@ from fastapi import HTTPException, Depends
 from app.utils.api_utils import validate_api_key
 from joblib import load
 import psycopg2
+import sys
 from app.db.connection import postgreSQL_connection
+
+# Get the project directory
+project_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Add the project directory to the system path
+sys.path.append(project_dir)
 
 # Load classifier model
 classifier_model_path = "./app/models/best_nb_classifier.joblib"
