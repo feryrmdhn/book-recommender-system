@@ -58,8 +58,8 @@ async def classify_book(
         image_url_s_key = f'image-url-s/{random_string}_{image_url_m.filename}'
         image_url_m_key = f'image-url-m/{random_string}_{image_url_m.filename}'
 
-        s3.upload_fileobj(image_url_s.file, spaces_bucket_name, image_url_s_key)
-        s3.upload_fileobj(image_url_m.file, spaces_bucket_name, image_url_m_key)
+        s3.upload_fileobj(image_url_s.file, spaces_bucket_name, image_url_s_key, ExtraArgs={'ACL': 'public-read'})
+        s3.upload_fileobj(image_url_m.file, spaces_bucket_name, image_url_m_key, ExtraArgs={'ACL': 'public-read'})
 
         # Construct URLs for the uploaded images
         image_url_s_path_spaces = f'{spaces_endpoint_url}/{spaces_bucket_name}/{image_url_s_key}'
