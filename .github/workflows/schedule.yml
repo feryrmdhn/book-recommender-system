@@ -62,4 +62,5 @@ jobs:
       - name: Run the cron job
         run: |
            cd $GITHUB_WORKSPACE
+           python -m app.db.connection
            python -m app.services.auto_predict_service
