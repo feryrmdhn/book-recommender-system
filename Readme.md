@@ -39,3 +39,13 @@ There is a link to see the machine learning code specifications on Google Colab:
     <li>https://colab.research.google.com/drive/1cN3YZh7JOjY_8LS5gO_o4bK8s3t3XG4k?usp=sharing</li>
     <li>https://colab.research.google.com/drive/1aTZMaXj76f0mZoFVlliagUPQulpoXzIt?usp=sharing</li>
 </ul>
+
+### Note
+Every time the push is successful, the droplet space will be full, it is recommended to delete the droplet cache.
+Then also clear the docker cache.
+<ul>
+    <li>docker ps</li>
+    <li>df -h</li>
+    <li>docker system prune -a -f --volumes</li>
+    <li>Check again df -h</li>
+</ul>
