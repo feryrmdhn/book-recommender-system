@@ -28,6 +28,17 @@ For initial setup, please follow the guide of README here https://github.com/fer
     <li>Check data in DB</li>
 </ul>
 
+### Bucketfiles
+<ul>
+    <li>Choose Space object storage at sidebar</li>
+    <li>Create space bucket</li>
+    <li>Set name of bucket</li>
+    <li>Copy origin endopint then paste in our code to access</li>
+    <li>Go to API at sidebar menu</li>
+    <li>Copy Secret key & Access key then input in .env code</li>
+    <li>Connect it when send the file</li>
+</ul>
+
 ### Setup Cronjob
 To see the setup code, please go to <i>schedule.yml</i>
 
